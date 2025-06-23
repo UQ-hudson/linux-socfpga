@@ -1,0 +1,9 @@
+Stratix10 TX Reboot fail issue.
+S10 TX SOC가 적용된 보드의 1차 시제 개발 완료 후 2차 시제 개발 중 Kernel에서 FPGA overlay configuration 진행 후 Reboot command를 실행하면 Cold reset 이후 U-boot으로 넘어가지 않고 hang 되는 증상이 발생하였음.
+IPS에 문의하였으나 원론적인 답변만 받음. 
+
+HPS First 방식, U-boot이 아닌 Kernel에서 FPGA를 configuration함. 
+RSU 사용 안하고 Device Tree Overlay 방식으로 configuration 진행함.
+
+SDM Debug Toolkit을 실행하여 status를 체크하였으나 State : 0xF0040000, Error Location 0x00001800 메시지만 나옴
+Userguide와 Google 검색에도 이와 관련된 어떠한 설명내용이 없음.
