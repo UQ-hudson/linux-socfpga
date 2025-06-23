@@ -3,7 +3,15 @@ S10 TX SOC가 적용된 보드의 1차 시제 개발 완료 후 2차 시제 개�
 IPS에 문의하였으나 원론적인 답변만 받음. 
 
 HPS First 방식, U-boot이 아닌 Kernel에서 FPGA를 configuration함. 
-RSU 사용 안하고 Device Tree Overlay 방식으로 configuration 진행함.
+RSU 사용 안하고 Device Tree Overlay 방식으로 core.rbf configuration을 진행함.
+
+방문하여 디버깅한 결과 Reset domain이 다르고 전체 system reset combination 로직이 잘못되어 
+reboot 진행시 FPGA fabric이 reset 걸려있을 것으로 판단됨.
+
+reset domain 수정 및 system reset 로직 변경 후 reboot 정상동작 확인함. 
+reset domain은 최대한 GHRD를 따라가야 함. H2F reset도 FPGA reset에 적용 해줘야 함.
+
+SDM Debug toolkit을 사용하면 현재 status를 알수 있으나 error code가 무슨의미인지 모르겠음.
 
 SDM Debug Toolkit을 실행하여 status를 체크하였으나 State : 0xF0040000, Error Location 0x00001800 메시지만 나옴
 Userguide와 Google 검색에도 이와 관련된 어떠한 설명내용이 없음.
